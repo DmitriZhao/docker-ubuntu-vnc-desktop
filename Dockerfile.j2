@@ -13,7 +13,8 @@ FROM arm32v7/{{image}} as system
 COPY --from=amd64 /usr/bin/qemu-arm-static /usr/bin/
 {%endif%}
 
-RUN sed -i "s/archive.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list;
+RUN sed -i "s/archive.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list \
+    && sed -i "s/security.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list
 
 # built-in packages
 ENV DEBIAN_FRONTEND noninteractive
@@ -105,7 +106,8 @@ RUN apt-get update \
 FROM {{image}} as builder
 
 {% if localbuild == 1 %}
-RUN sed -i "s/archive.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list;
+RUN sed -i "s/archive.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list \
+    && sed -i "s/security.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list
 {% endif %}
 
 RUN apt-get update \

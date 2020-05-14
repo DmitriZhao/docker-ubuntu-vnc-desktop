@@ -12,7 +12,8 @@ COPY --from=amd64 /usr/bin/qemu-aarch64-static /usr/bin/
 
 
 
-RUN sed -i "s/archive.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list;
+RUN sed -i "s/archive.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list \
+    && sed -i "s/security.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list
 
 
 # built-in packages
@@ -78,7 +79,8 @@ RUN apt-get update \
 FROM ubuntu:18.04 as builder
 
 
-RUN sed -i "s/archive.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list;
+RUN sed -i "s/archive.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list \
+    && sed -i "s/security.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list
 
 
 RUN apt-get update \
