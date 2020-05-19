@@ -72,4 +72,10 @@ fi
 PASSWORD=
 HTTP_PASSWORD=
 
+# start ssh server
+echo "Starting ssh server..."
+echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config && \
+echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+service ssh start
+
 exec /bin/tini -- supervisord -n -c /etc/supervisor/supervisord.conf
